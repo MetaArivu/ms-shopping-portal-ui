@@ -1,0 +1,26 @@
+:host{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: lightgrey;
+    align-items: center;
+}
+
+mat-card{
+    height: fit-content;
+}
+
+mat-form-field{
+    width: 100%;
+}
+
+.mat-card-actions  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center  ;
+}
+
+.button-icon-text {
+    width: unset;
+}
