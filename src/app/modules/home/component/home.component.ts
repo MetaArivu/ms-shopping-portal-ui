@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { CookieService } from "ngx-cookie-service";
 import { Menu } from "../model/menu";
 
 @Component({
@@ -11,10 +12,10 @@ export class HomeComponent implements OnInit {
 
     menus : Menu[] = [];
 
-    constructor(private router: Router) {
+    constructor(private cookieService: CookieService, private router: Router) {
 
         this.menus = [];
-        this.menus.push(new Menu("Catalog","category","/catalog"));
+        this.menus.push(new Menu("Catalog","category","home/catalogue"));
         this.menus.push(new Menu("My Cart","shopping_cart","/mycart"));
         this.menus.push(new Menu("My Orders","list_alt","/myorders" ));
         
@@ -26,7 +27,9 @@ export class HomeComponent implements OnInit {
 
     onMenuClick(menu: Menu){
         console.log(menu);
+        console.log(this.cookieService.get('customtoken'));
         this.router.navigate([menu.routeLink]);
+       
     }
 
     logout(){

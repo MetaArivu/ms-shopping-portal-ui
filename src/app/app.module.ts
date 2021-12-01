@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './modules/user/component/login.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { LoginComponent } from './modules/user/component/login.component';
     MaterialComponentModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

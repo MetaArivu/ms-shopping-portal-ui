@@ -6,31 +6,21 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule } from "@angular/router";
 import { MaterialComponentModule } from "src/material.modules";
-import { HomeComponent } from "./component/home.component";
+import { CatalogueComponent } from "./component/catalogue.component";
 
 
 @NgModule({
-    declarations: [HomeComponent],
+    declarations: [CatalogueComponent],
     imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
         MaterialComponentModule,
-        RouterModule.forChild([
-            {
-                path: '', component: HomeComponent, children: [
-                    {
-                        path: "catalogue",
-                        loadChildren: () => import("../catalogue/catalogue.module").then(m => m.CatalogueModule),
-                    }
-                ]
-            },
-
-        ]),
+        RouterModule.forChild([{ path: '', component: CatalogueComponent }]),
 
     ]
 })
-export class HomeModule {
+export class CatalogueModule {
 
 }

@@ -1,0 +1,27 @@
+
+
+ 
+<mat-grid-list  cols="2" gutterSize="10"  style="position: unset;">
+    <mat-grid-tile *ngFor="let item of catalogueItems" style=" margin: 10px; border: 1px; border-color: red;">
+       
+        <mat-card style="height: fit-content;">
+            <mat-card-header>
+              <mat-card-title>{{item.title}}</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image [src]="item.img" alt="Product Image"    >
+            <mat-card-content>
+              <p>
+               {{item.desc}}
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button  mat-raised-button  color="primary">ADD TO CART</button>
+            </mat-card-actions>
+          </mat-card>
+       
+    
+    </mat-grid-tile>
+    
+  </mat-grid-list>
+  
+  

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
+import { CookieService } from "ngx-cookie-service";
 import { AuthResponse } from "../model/auth-response.model";
 import { UserService } from "../service/user.service";
 
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     loader: boolean = false;
 
-    constructor(private userService: UserService, private _snackBar: MatSnackBar, private router: Router) {
+    constructor( private cookieService: CookieService,private userService: UserService, private _snackBar: MatSnackBar, private router: Router) {
         this.loginForm = new FormGroup({
             userName: new FormControl(null, [Validators.required, Validators.email]),
             password: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(10)])
@@ -47,6 +48,7 @@ export class LoginComponent implements OnInit {
                         this.loader = false;
                     }, 2000);
                     if (authResponse.success) {
+                        this.cookieService.set( 'customtoken', authResponse.tokenId); 
                         this._snackBar.open("Authenticated", "Success", { duration: 2000, panelClass: ["success"], })
                         this.router.navigate(['/home']);
                     } else {
