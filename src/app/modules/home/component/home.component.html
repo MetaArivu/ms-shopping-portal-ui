@@ -1,1 +1,36 @@
-home.component.html
+
+
+<div class="app-container">
+    <mat-toolbar color="primary" class="app-toolbar">
+        <button mat-icon-button (click)="snav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h1 class="app-title">Shopping Portal</h1>
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="logout()">
+            <mat-icon>logout</mat-icon>
+        </button>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="app-sidenav-container">
+        <mat-sidenav #snav mode="side" opened="true">
+            <mat-nav-list>
+                <mat-list-item *ngFor="let menu of menus" (click)="onMenuClick(menu)">
+                    <button mat-icon-button>
+                        <mat-icon>{{ menu.icon }}</mat-icon>
+                    </button>
+                    <a>{{ menu.title }}</a>
+
+                </mat-list-item>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <div class="router-outlet-container">
+                <!-- <router-outlet></router-outlet> -->
+            </div>
+            
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+ 
