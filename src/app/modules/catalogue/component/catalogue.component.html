@@ -8,12 +8,16 @@
             <mat-card-header>
               <mat-card-title>{{item.title}}</mat-card-title>
             </mat-card-header>
-            <img mat-card-image [src]="item.img" alt="Product Image"    >
+            <mat-divider inset></mat-divider>
+
+            <img mat-card-image [src]="item.img" alt="Product Image" >
             <mat-card-content>
               <p>
                {{item.desc}}
               </p>
             </mat-card-content>
+            <mat-divider inset></mat-divider>
+
             <mat-card-actions>
               <button  mat-raised-button  color="primary">ADD TO CART</button>
             </mat-card-actions>

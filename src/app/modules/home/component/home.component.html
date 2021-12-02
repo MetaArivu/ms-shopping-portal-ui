@@ -15,7 +15,7 @@
     <mat-sidenav-container class="app-sidenav-container">
         <mat-sidenav #snav mode="side" opened="true">
             <mat-nav-list>
-                <mat-list-item *ngFor="let menu of menus" (click)="onMenuClick(menu)">
+                <mat-list-item [ngClass]="{'mat-list-item-focus': menu.active}" *ngFor="let menu of menus" (click)="onMenuClick(menu)">
                     <button mat-icon-button>
                         <mat-icon>{{ menu.icon }}</mat-icon>
                     </button>

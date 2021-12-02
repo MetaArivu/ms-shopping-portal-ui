@@ -22,10 +22,16 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-
+        this.onMenuClick(this.menus[0]);
     }
 
     onMenuClick(menu: Menu){
+        this.menus.forEach(m=>{
+            m.active = false;
+            if(m.routeLink === menu.routeLink){
+                m.active = true;
+            }
+        })
         console.log(menu);
         console.log(this.cookieService.get('customtoken'));
         this.router.navigate([menu.routeLink]);

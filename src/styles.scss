@@ -10,15 +10,8 @@ body {
   .spacer{
     flex: 1 1 auto;
   }
-// .info {
-//     background: black;
-//     color: blue;
-// }
-// .success {
-//     background: black;
-//     color: green;
-// }
-// .error {
-//     background: black;
-//     color: red;
-// }
+
+  .mat-list-item-focus{
+    background-color:  rgba(0,0,0,.12);
+  }
+ 
