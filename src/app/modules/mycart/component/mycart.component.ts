@@ -4,14 +4,17 @@ import { MyCartService } from "../services/mycart.service";
 
 @Component({
     selector : 'mycart',
-    templateUrl : './mycart.component.html'
+    templateUrl : './mycart.component.html',
+    styleUrls:['./mycart.component.css']
 })
 export class MyCartComponent implements OnInit {
 
     myCart: MyCartModel[];
-
+    displayedColumns: string[] = ['itemName', 'price','qty','total'];
+    totalAmount: number;
     constructor(private mycartService: MyCartService) {
         this.myCart = [];
+        this.totalAmount = 0;
     }
 
     ngOnInit(){
@@ -19,10 +22,16 @@ export class MyCartComponent implements OnInit {
     }
 
     private fetchMyCartDetails(){
+        this.myCart = [];
+        this.totalAmount = 0;
         this.mycartService
             .fetchMyCart()
-            .subscribe((myCart: MyCartModel[])=>{
-                this.myCart = myCart;
-            })
+            .subscribe((_myCart: MyCartModel[])=>{
+                _myCart.forEach(cart=>{
+                    let model : MyCartModel  = new MyCartModel(cart.id,cart.itemId,cart.itemName,cart.desc,cart.qty,cart.price,cart.img);
+                    this.totalAmount = this.totalAmount + model.total;
+                    this.myCart.push(model);
+                 });
+            }); 
     }
 }
