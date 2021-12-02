@@ -46,14 +46,15 @@ export class LoginComponent implements OnInit {
                     console.log("Auth Response=", authResponse);
                     setTimeout(() => {
                         this.loader = false;
-                    }, 2000);
-                    if (authResponse.success) {
-                        this.cookieService.set( 'customtoken', authResponse.tokenId); 
-                        this._snackBar.open("Authenticated", "Success", { duration: 2000, panelClass: ["success"], })
-                        this.router.navigate(['/home']);
-                    } else {
-                        this._snackBar.open("Please enter valid username and password", "Error", { duration: 2000, panelClass: ["error"], })
-                    }
+                        if (authResponse.success) {
+                            this.cookieService.set( 'customtoken', authResponse.tokenId); 
+                            this._snackBar.open("Authenticated", "Success", { duration: 2000, panelClass: ["success"], })
+                            this.router.navigate(['/home']);
+                        } else {
+                            this._snackBar.open("Please enter valid username and password", "Error", { duration: 2000, panelClass: ["error"], })
+                        }
+                    }, 1000);
+                    
 
                 }
             )
