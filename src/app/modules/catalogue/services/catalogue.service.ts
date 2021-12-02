@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { CatalogueModel } from "./catalogue.model";
+import { CatalogueModel } from "../model/catalogue.model";
 
 @Injectable({ providedIn: 'root' })
 export class CatalogueService {

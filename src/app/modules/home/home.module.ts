@@ -23,7 +23,16 @@ import { HomeComponent } from "./component/home.component";
                     {
                         path: "catalogue",
                         loadChildren: () => import("../catalogue/catalogue.module").then(m => m.CatalogueModule),
+                    },
+                    {
+                        path: "mycart",
+                        loadChildren: () => import("../mycart/mycart.module").then(m => m.MyCartModule),
+                    },
+                    {
+                        path: "myorders",
+                        loadChildren: () => import("../myorders/myorder.module").then(m => m.MyOrderModule),
                     }
+
                 ]
             },
 

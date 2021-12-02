@@ -16,8 +16,8 @@ export class HomeComponent implements OnInit {
 
         this.menus = [];
         this.menus.push(new Menu("Catalog","category","home/catalogue"));
-        this.menus.push(new Menu("My Cart","shopping_cart","/mycart"));
-        this.menus.push(new Menu("My Orders","list_alt","/myorders" ));
+        this.menus.push(new Menu("My Cart","shopping_cart","home/mycart"));
+        this.menus.push(new Menu("My Orders","list_alt","home/myorders" ));
         
     }
 
