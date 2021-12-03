@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
         this.loginForm = new FormGroup({
             userName: new FormControl(null, [Validators.required, Validators.email]),
             password: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(10)])
-        })
+        });
     }
 
     ngOnInit() {
@@ -58,5 +58,9 @@ export class LoginComponent implements OnInit {
 
                 }
             )
+    }
+
+    createAccount(){
+        this.router.navigate(['/user/add']);
     }
 }

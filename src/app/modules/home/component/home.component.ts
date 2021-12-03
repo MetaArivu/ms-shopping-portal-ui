@@ -31,13 +31,14 @@ export class HomeComponent implements OnInit {
                 m.active = true;
             }
         })
-        console.log(menu);
-        console.log(this.cookieService.get('customtoken'));
+        //console.log(menu);
+        //console.log(this.cookieService.get('customtoken'));
         this.router.navigate([menu.routeLink]);
        
     }
 
     logout(){
+        this.cookieService.deleteAll();
         this.router.navigate(['/']);
     }
 }

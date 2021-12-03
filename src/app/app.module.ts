@@ -9,10 +9,12 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './modules/user/component/login.component';
 import { CookieService } from 'ngx-cookie-service';
+import { PageNotFoundComponent } from './modules/common/component/page.not.found.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PageNotFoundComponent
   ],
   imports: [
     FormsModule,
