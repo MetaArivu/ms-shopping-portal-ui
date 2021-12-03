@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './modules/user/component/login.component';
 import { CookieService } from 'ngx-cookie-service';
 import { PageNotFoundComponent } from './modules/common/component/page.not.found.component';
+import { AuthGaurdService } from './modules/common/service/auth.gaurd.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { PageNotFoundComponent } from './modules/common/component/page.not.found
     MaterialComponentModule,
     AppRoutingModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, AuthGaurdService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
