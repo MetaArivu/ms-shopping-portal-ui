@@ -1,31 +1,37 @@
 
 
- 
-<mat-grid-list  cols="2" gutterSize="10"  style="position: unset;">
-    <mat-grid-tile *ngFor="let item of catalogueItems" style=" margin: 10px; border: 1px; border-color: red;">
-       
-        <mat-card style="height: fit-content;">
-            <mat-card-header>
-              <mat-card-title>{{item.title}}</mat-card-title>
-            </mat-card-header>
-            <mat-divider inset></mat-divider>
+<mat-grid-list cols="2" gutterSize="10" style="position: unset;">
 
-            <img mat-card-image [src]="item.img" alt="Product Image" >
-            <mat-card-content>
-              <p>
-               {{item.desc}}
-              </p>
-            </mat-card-content>
-            <mat-divider inset></mat-divider>
+  <mat-grid-tile *ngFor="let item of catalogueItems" style=" margin: 10px; border: 1px; border-color: red;">
 
-            <mat-card-actions>
-              <button  mat-raised-button  color="primary">ADD TO CART</button>
-            </mat-card-actions>
-          </mat-card>
-       
-    
-    </mat-grid-tile>
-    
-  </mat-grid-list>
-  
-  
+    <mat-card style="height: fit-content;">
+      <mat-card-header>
+        <mat-card-title>{{item.title}}</mat-card-title>
+      </mat-card-header>
+      <mat-divider inset></mat-divider>
+
+      <img mat-card-image [src]="item.img" alt="Product Image">
+      <mat-card-content>
+        <p>
+          {{item.desc}}
+        </p>
+      </mat-card-content>
+      <mat-divider inset *ngIf="!item.loader"></mat-divider>
+
+      <mat-progress-bar *ngIf="item.loader" mode="indeterminate"></mat-progress-bar>
+
+      <mat-card-actions style="display: inline-flex; width: 100%; justify-content: flex-end">
+        <button mat-raised-button color="primary" (click)="addToCart(item)">
+
+          <mat-icon>add_shopping_cart</mat-icon>
+          <span>&nbsp;ADD TO CART</span>
+        </button>
+      </mat-card-actions>
+
+
+    </mat-card>
+
+
+  </mat-grid-tile>
+
+</mat-grid-list>

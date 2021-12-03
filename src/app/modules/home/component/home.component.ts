@@ -13,10 +13,9 @@ export class HomeComponent implements OnInit {
     menus : Menu[] = [];
 
     constructor(private cookieService: CookieService, private router: Router) {
-
         this.menus = [];
         this.menus.push(new Menu("Catalog","category","home/catalogue"));
-        this.menus.push(new Menu("My Cart","shopping_cart","home/mycart"));
+        this.menus.push(new Menu("My Cart","shopping_cart","home/cart"));
         this.menus.push(new Menu("My Orders","list_alt","home/myorders" ));
         
     }

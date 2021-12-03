@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { MyCartModel } from "../model/mycart.model";
 import { MyCartService } from "../services/mycart.service";
 
@@ -12,7 +13,9 @@ export class MyCartComponent implements OnInit {
     myCart: MyCartModel[];
     displayedColumns: string[] = ['itemName', 'price','qty','total'];
     totalAmount: number;
-    constructor(private mycartService: MyCartService) {
+    loader: boolean = false;
+
+    constructor(private mycartService: MyCartService, private router : Router) {
         this.myCart = [];
         this.totalAmount = 0;
     }
@@ -33,5 +36,12 @@ export class MyCartComponent implements OnInit {
                     this.myCart.push(model);
                  });
             }); 
+    }
+
+    proceedToPayment(){
+        this.loader = true;
+        setTimeout(() => {
+            this.router.navigate(['/home/payment']);
+        }, 1000);
     }
 }

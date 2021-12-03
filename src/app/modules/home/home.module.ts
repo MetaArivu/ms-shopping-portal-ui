@@ -25,8 +25,12 @@ import { HomeComponent } from "./component/home.component";
                         loadChildren: () => import("../catalogue/catalogue.module").then(m => m.CatalogueModule),
                     },
                     {
-                        path: "mycart",
+                        path: "cart",
                         loadChildren: () => import("../mycart/mycart.module").then(m => m.MyCartModule),
+                    },
+                    {
+                        path: "payment",
+                        loadChildren: () => import("../payment/payment.module").then(m => m.PaymentModule),
                     },
                     {
                         path: "myorders",

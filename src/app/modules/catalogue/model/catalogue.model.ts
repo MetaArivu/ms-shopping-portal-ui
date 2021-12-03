@@ -4,7 +4,7 @@ export class CatalogueModel {
     desc: string;
     price: number;
     img: string;
-
+    loader : boolean = false;
     constructor(title: string, id: string, desc: string, price: number, img: string) {
         this.desc = desc;
         this.id = id;

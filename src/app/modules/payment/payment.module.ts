@@ -6,11 +6,11 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule } from "@angular/router";
 import { MaterialComponentModule } from "src/material.modules";
-import { MyCartComponent } from "./component/mycart.component";
+import { PaymentComponent } from "./component/payment.component";
 
 
 @NgModule({
-    declarations: [MyCartComponent],
+    declarations: [PaymentComponent],
     imports: [
         CommonModule,
         FormsModule,
@@ -18,11 +18,11 @@ import { MyCartComponent } from "./component/mycart.component";
         HttpClientModule,
         MaterialComponentModule,
         RouterModule.forChild([
-            { path: '', component: MyCartComponent },
+            { path: '', component: PaymentComponent },
         ]),
 
     ]
 })
-export class MyCartModule {
+export class PaymentModule {
 
 }

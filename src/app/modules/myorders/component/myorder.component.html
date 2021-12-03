@@ -8,7 +8,7 @@
         <table mat-table [dataSource]="myOrder" *ngIf="myOrder.length>0">
 
 
-            <ng-container matColumnDef="orderNo">
+            <ng-container matColumnDef="orderNo" >
                 <th mat-header-cell *matHeaderCellDef> ORDER NO </th>
                 <td mat-cell *matCellDef="let element"> {{element.orderNo}} </td>
                 <td mat-footer-cell *matFooterCellDef>   </td>

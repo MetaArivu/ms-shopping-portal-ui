@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { CatalogueModel } from "../model/catalogue.model";
 import { CatalogueService } from "../services/catalogue.service";
 
@@ -10,7 +11,9 @@ import { CatalogueService } from "../services/catalogue.service";
 export class CatalogueComponent implements OnInit {
 
     catalogueItems: CatalogueModel[] = [];
-    constructor(private catalogueService: CatalogueService){
+    loader : boolean = false;
+
+    constructor(private catalogueService: CatalogueService,private _snackBar: MatSnackBar){
 
     }
 
@@ -24,5 +27,14 @@ export class CatalogueComponent implements OnInit {
         .subscribe((catalogueItems: CatalogueModel[])=>{
             this.catalogueItems = catalogueItems;
         })
+    }
+
+    addToCart(item: CatalogueModel){
+        item.loader = true;
+        setTimeout(() => {
+            item.loader  = false;
+            this._snackBar.open("Item Added To Cart Successfully !", "Success", { duration: 2000, panelClass: ["success"], })
+
+        }, 1000);
     }
 }
