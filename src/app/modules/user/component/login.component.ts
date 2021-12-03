@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.cookieService.deleteAll('/');
     }
 
     onSubmit() {
@@ -47,7 +48,7 @@ export class LoginComponent implements OnInit {
                     setTimeout(() => {
                         this.loader = false;
                         if (authResponse.success) {
-                            this.cookieService.set( 'customtoken', authResponse.tokenId); 
+                            this.cookieService.set('customtoken', authResponse.tokenId, 1,'/'); 
                             this._snackBar.open("Authenticated", "Success", { duration: 2000, panelClass: ["success"], })
                             this.router.navigate(['/home']);
                         } else {

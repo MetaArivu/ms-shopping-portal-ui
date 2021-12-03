@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { CookieService } from "ngx-cookie-service";
 
 @Component({
     selector :'pagenotfound',
@@ -8,7 +9,7 @@ import { Router } from "@angular/router";
 })
 export class PageNotFoundComponent implements OnInit {
 
-    constructor(private router: Router){
+    constructor(private router: Router, private cookieService: CookieService){
 
     }
 
@@ -17,6 +18,7 @@ export class PageNotFoundComponent implements OnInit {
     }
 
     mainPage(){
+        this.cookieService.deleteAll();
         this.router.navigate(['/']);
     }
 }
