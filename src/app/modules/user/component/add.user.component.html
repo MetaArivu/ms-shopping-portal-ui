@@ -5,6 +5,7 @@
     
         <form [formGroup]="userForm">
             <div fxLayout="row" fxLayoutAlign="space-between">
+
                 <mat-form-field>
                     <mat-label>Login Id</mat-label>
                     <input type="text" matInput id="userName" name="userName" formControlName="userName">
@@ -17,6 +18,7 @@
                         </span>
                     </mat-hint>
                 </mat-form-field>
+
                 <mat-form-field>
                     <mat-label>Password</mat-label>
                     <input type="password" name="password"  matInput  formControlName="password">
@@ -29,10 +31,123 @@
                         </span>
                     </mat-hint>
                 </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Confirm Password</mat-label>
+                    <input type="password" name="confirmPassword"  matInput  formControlName="confirmPassword">
+                    <mat-hint  *ngIf="!userForm.get('confirmPassword')?.valid && userForm.get('confirmPassword')?.touched">
+                        <span *ngIf="userForm.get('confirmPassword')?.errors?.['required']">
+                            Please enter valid confirm password.
+                        </span>
+                        <span *ngIf="userForm.get('confirmPassword')?.errors?.['minlength'] || userForm.get('confirmPassword')?.errors?.['maxlength']">
+                            Confirm Password minimum length=5 and max length=10
+                        </span>
+                    </mat-hint>
+                </mat-form-field>
+
             </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+
+                <mat-form-field>
+                    <mat-label>First Name</mat-label>
+                    <input type="text" matInput id="firstName" name="firstName" formControlName="firstName">
+                    <mat-hint  *ngIf="!userForm.get('firstName')?.valid && userForm.get('firstName')?.touched">
+                        <span *ngIf="userForm.get('firstName')?.errors?.['required']">
+                            Please enter valid first name.
+                        </span>
+                        <span *ngIf="userForm.get('firstName')?.errors?.['minlength']">
+                           First name minimum length=5 
+                        </span>
+                    </mat-hint>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Middle Name</mat-label>
+                    <input type="text" matInput id="middleName" name="middleName" formControlName="middleName">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Last Name</mat-label>
+                    <input type="text" matInput id="lastName" name="lastName" formControlName="lastName">
+                    <mat-hint  *ngIf="!userForm.get('lastName')?.valid && userForm.get('lastName')?.touched">
+                        <span *ngIf="userForm.get('lastName')?.errors?.['lastName']">
+                            Please enter valid last name.
+                        </span>
+                        <span *ngIf="userForm.get('lastName')?.errors?.['minlength']">
+                           Last name minimum length=5 
+                        </span>
+                    </mat-hint>
+                </mat-form-field>
+
+            </div>
+
+            
+            <div fxLayout="row" fxLayoutAlign="space-between">
+
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input type="text" matInput id="email" name="email" formControlName="email">
+                    <mat-hint  *ngIf="!userForm.get('email')?.valid && userForm.get('email')?.touched">
+                        <span *ngIf="userForm.get('email')?.errors?.['required']">
+                            Please enter valid email.
+                        </span>
+                    </mat-hint>
+                </mat-form-field>
+ 
+                <mat-form-field>
+                    <mat-label>Phone</mat-label>
+                    <input type="text" matInput id="phone" name="phone" formControlName="phone">
+                    <mat-hint  *ngIf="!userForm.get('phone')?.valid && userForm.get('phone')?.touched">
+                        <span *ngIf="userForm.get('phone')?.errors?.['required']">
+                            Please enter valid phone number.
+                        </span>
+                    </mat-hint>
+                </mat-form-field>
+
+            </div>
+
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+
+                <mat-form-field>
+                    <mat-label>Date Of Birth</mat-label>
+                    <input matInput [matDatepicker]="dob" formControlName="dob">
+                    <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+                    <mat-datepicker #dob>
+                        <mat-datepicker-actions>
+                            <button mat-button matDatepickerCancel>Cancel</button>
+                            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                        </mat-datepicker-actions>
+                    </mat-datepicker>
+
+                    <mat-hint  *ngIf="!userForm.get('dob')?.valid && userForm.get('dob')?.touched">
+                        <span *ngIf="userForm.get('dob')?.errors?.['required']">
+                            Please enter valid date of birth.
+                        </span>
+                    </mat-hint>
+                </mat-form-field>
+ 
+                <div class="form-field">
+                    <mat-label>Gender</mat-label>
+                    <br/>
+                    <mat-radio-group id="gender" name="gender" formControlName="gender">
+                        <mat-radio-button value="m"> Male &nbsp; </mat-radio-button>
+                         
+                        <mat-radio-button value="f"> Female </mat-radio-button>
+                      </mat-radio-group>
+
+                    <mat-hint  *ngIf="!userForm.get('gender')?.valid && userForm.get('gender')?.touched">
+                        <span *ngIf="userForm.get('gender')?.errors?.['required']">
+                            Please select valid gender.
+                        </span>
+                    </mat-hint>
+                </div>
+            </div>
+
             
         </form>
-         
+
     </mat-card-content>
 
     <mat-divider inset></mat-divider>
@@ -40,10 +155,17 @@
     <mat-card-actions>
         <div style="flex-grow: 1; justify-content: center; display: inline-flex;">
        
-            <button style="width: 90%;" color="primary" mat-raised-button class="button-icon-text" aria-label="Login" (click)="onSubmit()" [disabled]="!userForm.valid" >
+
+            <button mat-raised-button class="button-icon-text" aria-label="Reset" (click)="reset()">
+                <mat-icon>restart_alt</mat-icon>
+                <span>&nbsp;Reset</span>
+            </button>
+
+            <button color="primary" mat-raised-button class="button-icon-text" aria-label="Create Account" (click)="onSubmit()" >
                 <mat-icon>save</mat-icon>
                 <span>&nbsp;Create Account</span>
             </button>
+
         </div>  
          
         <mat-progress-bar *ngIf="loader" mode="indeterminate"></mat-progress-bar>
