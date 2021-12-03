@@ -58,4 +58,8 @@ export class AddUserComponent implements OnInit {
     reset() {
         this.userForm.reset();
     }
+
+    home() {
+        this.router.navigate(['/']);
+    }
 }

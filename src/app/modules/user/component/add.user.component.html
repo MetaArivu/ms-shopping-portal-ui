@@ -1,5 +1,5 @@
 <mat-card>
-    <mat-card-title>Create Account</mat-card-title>
+    <mat-card-title> Create Account</mat-card-title>
     <mat-card-subtitle>In Shopping Portal App</mat-card-subtitle>
     <mat-card-content>
     
@@ -153,18 +153,25 @@
     <mat-divider inset></mat-divider>
 
     <mat-card-actions>
-        <div style="flex-grow: 1; justify-content: center; display: inline-flex;">
-       
-
-            <button mat-raised-button class="button-icon-text" aria-label="Reset" (click)="reset()">
-                <mat-icon>restart_alt</mat-icon>
-                <span>&nbsp;Reset</span>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+            <button  mat-flat-button class="button-icon-text" aria-label="Home" (click)="home()">
+                <mat-icon>home</mat-icon>
+                <span>&nbsp;Home</span>
             </button>
 
-            <button color="primary" mat-raised-button class="button-icon-text" aria-label="Create Account" (click)="onSubmit()" >
-                <mat-icon>save</mat-icon>
-                <span>&nbsp;Create Account</span>
-            </button>
+            <div>
+                <button mat-raised-button class="button-icon-text" aria-label="Reset" (click)="reset()">
+                    <mat-icon>restart_alt</mat-icon>
+                    <span>&nbsp;Reset</span>
+                </button>
+    
+                <button color="primary" mat-raised-button class="button-icon-text" aria-label="Create Account" (click)="onSubmit()" >
+                    <mat-icon>save</mat-icon>
+                    <span>&nbsp;Create Account</span>
+                </button>
+            </div>
+
+            
 
         </div>  
          
