@@ -1,0 +1,48 @@
+<mat-card style="height: fit-content;">
+    <mat-card-header style="display: inline-flex; width: 100%; justify-content: space-between">
+        <mat-card-title>{{prodDetails.name}}</mat-card-title>
+        <button mat-flat-button>
+            <mat-icon>attach_money</mat-icon>
+            <span>&nbsp;{{prodDetails.price}}</span>
+        </button>
+    </mat-card-header>
+
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <img mat-card-image
+        [src]="'https://www.globalbrandsmagazine.com/wp-content/uploads/2020/08/Top-10-Mobile-Brands-in-World-1-1.jpg'"
+        alt="Product Image">
+
+        <mat-card-content >
+            
+            <div *ngIf="prodDetails.review.reviewPresent">
+                <mat-label>Author: </mat-label><b>Reviews</b><br/>
+
+                <div *ngFor="let review of prodDetails.review.reviews">
+                    <mat-label>Author: </mat-label><b>{{review.reviewerName}}</b><br/>
+                    <mat-label>Rating: </mat-label><b>{{review.rating}}/5</b><br/>
+                    <mat-label>Description: </mat-label><b>{{review.description}}</b><br/>
+                    <mat-divider inset></mat-divider>
+
+                    <br/>
+                </div>
+            </div>
+        </mat-card-content>
+    </div>
+    
+    <p>
+        {{prodDetails.description}}
+    </p>
+    <mat-divider inset *ngIf="!loader"></mat-divider>
+
+    <mat-progress-bar *ngIf="loader" mode="indeterminate"></mat-progress-bar>
+
+    <mat-card-actions style="display: inline-flex; width: 100%; justify-content: end">
+
+        <button mat-raised-button color="primary" (click)="mainPage()">
+            <mat-icon>home</mat-icon>
+            <span>&nbsp;HOME</span>
+        </button>
+    </mat-card-actions>
+
+
+</mat-card>

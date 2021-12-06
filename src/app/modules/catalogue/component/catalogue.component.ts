@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { Router } from "@angular/router";
 import { CatalogueModel, CatalogueResponseModel } from "../model/catalogue.model";
 import { CatalogueService } from "../services/catalogue.service";
 
@@ -13,7 +14,7 @@ export class CatalogueComponent implements OnInit {
     catalogueItems: CatalogueModel[] = [];
     loader : boolean = false;
 
-    constructor(private catalogueService: CatalogueService,private _snackBar: MatSnackBar){
+    constructor(private catalogueService: CatalogueService,private _snackBar: MatSnackBar, private route: Router){
 
     }
 
@@ -36,5 +37,10 @@ export class CatalogueComponent implements OnInit {
             this._snackBar.open("Item Added To Cart Successfully !", "Success", { duration: 2000, panelClass: ["success"], })
 
         }, 1000);
+    }
+
+    review(item: CatalogueModel){
+        console.log(item);
+        this.route.navigate(['/home/catalogue/review/',item.id]);
     }
 }

@@ -20,6 +20,16 @@ export class CatalogueService {
             })
           };
         return this.http.get<CatalogueResponseModel>(url,httpOptions);
-        //return new AuthResponse(true, "User Authenticated Successfully!", new Date().getTime() + "");
     }
+
+    fetchProductDetails(id: string) {
+      const url  = environment.prodService+environment.allProducts+id;
+      const httpOptions = {
+          headers: new HttpHeaders({
+            'Content-Type':  'application/json',
+            'Authorization': this.cookieService.get('customtoken')
+          })
+        };
+      return this.http.get<any>(url,httpOptions);
+  }
 }

@@ -7,17 +7,22 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule } from "@angular/router";
 import { MaterialComponentModule } from "src/material.modules";
 import { CatalogueComponent } from "./component/catalogue.component";
+import { ReviewComponent } from "./component/review.component";
 
 
 @NgModule({
-    declarations: [CatalogueComponent],
+    declarations: [CatalogueComponent, ReviewComponent],
     imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
         MaterialComponentModule,
-        RouterModule.forChild([{ path: '', component: CatalogueComponent }]),
+        RouterModule.forChild([
+            { path: '', redirectTo: 'products', pathMatch: 'full' },
+            {path: 'products', component: CatalogueComponent},
+            {path: 'review/:id', component: ReviewComponent},
+        ]),
 
     ]
 })
