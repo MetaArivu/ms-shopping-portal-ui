@@ -41,14 +41,17 @@ export class LoginComponent implements OnInit {
                     authResponse = response;
                 },
                 (error) => {
+                    debugger;
                     console.log("Authentication error=", error);
+                    this.loader = false;
+                    this._snackBar.open(error.error.message, "Error", { duration: 2000, panelClass: ["error"], })
                 },
                 () => {
                     console.log("Auth Response=", authResponse);
                     setTimeout(() => {
                         this.loader = false;
                         if (authResponse.success) {
-                            this.cookieService.set('customtoken', authResponse.tokenId, 1,'/'); 
+                            this.cookieService.set('customtoken', authResponse.data.token, 1,'/'); 
                             this._snackBar.open("Authenticated", "Success", { duration: 2000, panelClass: ["success"], })
                             this.router.navigate(['/home']);
                         } else {

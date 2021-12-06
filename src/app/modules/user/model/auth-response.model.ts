@@ -1,11 +1,11 @@
 export class AuthResponse {
-    success: boolean;
-    message: string;
-    tokenId: string;
+    success: boolean = false;
+    message: string = "";
+    data: AuthData = new AuthData();
 
-    constructor(success: boolean, message: string, tokenid: string){
-        this.success = success;
-        this.message = message;
-        this.tokenId = tokenid;
-    }
+     
+}
+
+export class AuthData{
+    token : string = "";
 }
