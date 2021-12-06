@@ -1,16 +1,15 @@
-export class CatalogueModel {
-    title: string;
-    id: string;
-    desc: string;
-    price: number;
-    img: string;
-    loader : boolean = false;
-    constructor(title: string, id: string, desc: string, price: number, img: string) {
-        this.desc = desc;
-        this.id = id;
-        this.price = price;
-        this.title = title;
-        this.img = img;
-    }
 
+export class CatalogueResponseModel {
+    success : boolean = false;
+    message : string = "";
+    data : CatalogueModel [] = [];
+}
+
+export class CatalogueModel {
+    name: string = "";
+    id: string = "";
+    description: string = "";
+    price: number = 0.0;
+    image: string  = "";
+    loader : boolean = false;
 }

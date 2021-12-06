@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { CatalogueModel } from "../model/catalogue.model";
+import { CatalogueModel, CatalogueResponseModel } from "../model/catalogue.model";
 import { CatalogueService } from "../services/catalogue.service";
 
 @Component({
@@ -24,8 +24,8 @@ export class CatalogueComponent implements OnInit {
     private fetchAllCatlogueItems(){
         this.catalogueService
         .fetchAllCatlogueItems()
-        .subscribe((catalogueItems: CatalogueModel[])=>{
-            this.catalogueItems = catalogueItems;
+        .subscribe((catalogueResponse: CatalogueResponseModel)=>{
+            this.catalogueItems = catalogueResponse.data;
         })
     }
 

@@ -6,23 +6,26 @@
 
     <mat-card style="height: fit-content;">
       <mat-card-header>
-        <mat-card-title>{{item.title}}</mat-card-title>
+        <mat-card-title>{{item.name}}</mat-card-title>
       </mat-card-header>
       <mat-divider inset></mat-divider>
 
-      <img mat-card-image [src]="item.img" alt="Product Image">
+      <img mat-card-image [src]="'https://www.globalbrandsmagazine.com/wp-content/uploads/2020/08/Top-10-Mobile-Brands-in-World-1-1.jpg'" alt="Product Image">
       <mat-card-content>
         <p>
-          {{item.desc}}
+          {{item.description}}
         </p>
       </mat-card-content>
       <mat-divider inset *ngIf="!item.loader"></mat-divider>
 
       <mat-progress-bar *ngIf="item.loader" mode="indeterminate"></mat-progress-bar>
 
-      <mat-card-actions style="display: inline-flex; width: 100%; justify-content: flex-end">
+      <mat-card-actions style="display: inline-flex; width: 100%; justify-content: space-between">
+        <button mat-flat-button (click)="addToCart(item)">
+          <mat-icon>attach_money</mat-icon>
+          <span>&nbsp;{{item.price}}</span>
+        </button>
         <button mat-raised-button color="primary" (click)="addToCart(item)">
-
           <mat-icon>add_shopping_cart</mat-icon>
           <span>&nbsp;ADD TO CART</span>
         </button>

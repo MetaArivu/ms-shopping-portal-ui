@@ -4,7 +4,12 @@
 
 export const environment = {
   production: false,
+  
   userService : "http://localhost:6061/user-service",
+  prodService : "http://localhost:6062/product-service",
+  
   loginUrl : "/api/v1/login",
-  registerUserUrl : "/api/v1/register"
+  registerUserUrl : "/api/v1/register",
+
+  allProducts : "/api/v1/"
 };
