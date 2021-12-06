@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
+import { HttpResponse } from "../../common/model/response.model";
 import { UserService } from "../service/user.service";
 
 @Component({
@@ -44,13 +45,42 @@ export class AddUserComponent implements OnInit {
         if (!this.userForm.valid) {
             this._snackBar.open("Please enter valid data for account creation!", "Error", { duration: 2000 })
         } else {
-            this.loader = true;
-            setTimeout(() => {
-                this.router.navigate(['/']);
-                console.log(this.userForm.value);
-                this._snackBar.open("Account created successfully!", "Success", { duration: 2000 })
 
-            }, 1000);
+        let httpResponse: HttpResponse;    
+        this.loader = true;
+        this.userService
+            .register(this.userForm.value)
+            .subscribe(
+                (response: HttpResponse) => {
+                    httpResponse = response;
+                },
+                (error) => {
+                    this.loader = false;
+                    this._snackBar.open(error.error.message, "Error", { duration: 2000, panelClass: ["error"], })
+                },
+                () => {
+                    console.log("Response=", httpResponse);
+                    setTimeout(() => {
+                        this.loader = false;
+                        if (httpResponse.success) {
+                            this.router.navigate(['/']);
+                            this._snackBar.open("Account created successfully!", "Success", { duration: 2000 });
+                        } else {
+                            this._snackBar.open("Account cannot be created !", "Error", { duration: 2000 })
+                        }
+                    }, 1000);
+                    
+
+                }
+            );
+
+            // this.loader = true;
+            // setTimeout(() => {
+            //     this.router.navigate(['/']);
+            //     console.log(this.userForm.value);
+            //     this._snackBar.open("Account created successfully!", "Success", { duration: 2000 })
+
+            // }, 1000);
         }
 
     }

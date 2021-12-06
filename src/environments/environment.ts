@@ -5,5 +5,6 @@
 export const environment = {
   production: false,
   userService : "http://localhost:6061/user-service",
-  loginUrl : "/api/v1/login"
+  loginUrl : "/api/v1/login",
+  registerUserUrl : "/api/v1/register"
 };
