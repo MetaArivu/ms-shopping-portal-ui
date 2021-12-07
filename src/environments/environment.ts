@@ -9,6 +9,7 @@ export const environment = {
   prodService : "http://localhost:6062/product-service",
   cartCmdService : "http://localhost:6064/shopping-cart-cmd-service",
   cartQueryService : "http://localhost:6066/shopping-cart-query-service",
+  paymentService : "http://localhost:6068/payment-service",
   
   loginUrl : "/api/v1/login",
   registerUserUrl : "/api/v1/register",
@@ -18,5 +19,7 @@ export const environment = {
   addToCart : "/api/v1/add",
   removeFromCart : "/api/v1/remove",
 
-  myCart : "/api/v1/"
+  myCart : "/api/v1/",
+
+  makePayment : "/api/v1/"
 };

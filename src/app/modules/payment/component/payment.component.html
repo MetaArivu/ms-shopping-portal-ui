@@ -1,6 +1,6 @@
 <mat-card style="height: fit-content;">
     <mat-card-header>
-        <mat-card-title>Make Payment</mat-card-title>
+        <mat-card-title>Make Payment ({{totalAmount}})</mat-card-title>
     </mat-card-header>
     <mat-divider inset></mat-divider>
 
@@ -52,9 +52,9 @@
             <mat-icon>shopping_cart</mat-icon>
             <span>&nbsp;MY CART</span>
         </button>
-        <button mat-raised-button color="warn" (click)="makePayment()">
+        <button mat-raised-button color="warn" (click)="makePayment()" [disabled]="!paymentForm.valid">
             <mat-icon>credit_card</mat-icon>
-            <span>&nbsp;MAKE PAYMENT</span>
+            <span>&nbsp;MAKE PAYMENT ({{totalAmount}})</span>
         </button>
     </mat-card-actions>
     <mat-progress-bar *ngIf="loader" mode="indeterminate"></mat-progress-bar>
