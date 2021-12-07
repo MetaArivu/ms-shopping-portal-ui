@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { MyOrderModel } from "../model/myorder.model";
+import { MyOrderModel, MyOrderResponseModel } from "../model/myorder.model";
 import { MyOrderService } from "../services/myorder.service";
 
 @Component({
@@ -10,9 +10,9 @@ import { MyOrderService } from "../services/myorder.service";
 export class MyOrderComponent implements OnInit {
 
     myOrder: MyOrderModel[];
-    displayedColumns: string[] = ['orderNo', 'orderDate','success','total'];
+    displayedColumns: string[] = ['orderNo', 'orderDate','paymentStatus','total'];
     totalAmount: number;
-
+    loader : boolean = false;
     constructor(private myOrderService: MyOrderService) {
         this.myOrder = [];
         this.totalAmount = 0;
@@ -23,18 +23,19 @@ export class MyOrderComponent implements OnInit {
     }
 
     private fetchMyOrderDetails(){
+        this.loader = true;
         this.totalAmount = 0;
         this.myOrder = [];
         this.myOrderService
             .fetchMyOrders()
-            .subscribe((_myOrder: MyOrderModel[])=>{
-                _myOrder.forEach((order)=>{
-                    let model : MyOrderModel  = new MyOrderModel(order.id,order.orderNo, order.orderDate,order.total,order.success);
-                    this.totalAmount = this.totalAmount + model.total;
-                    this.myOrder.push(model);
-                });
-                console.log(this.myOrder);
-                //this.myOrder = myOrder;
+            .subscribe((_myOrder: MyOrderResponseModel)=>{
+                if(_myOrder.success){
+                    _myOrder.data.forEach((order)=>{
+                        this.totalAmount = this.totalAmount + order.total;
+                        this.myOrder.push(order);
+                    })
+                }
+                this.loader = false;
             })
     }
 }

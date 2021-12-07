@@ -3,6 +3,7 @@
         <mat-card-title>My Orders ({{myOrder.length}})</mat-card-title>
     </mat-card-header>
     <mat-divider inset></mat-divider>
+    <mat-progress-bar *ngIf="loader" mode="indeterminate"></mat-progress-bar>
 
     <mat-card-content>
         <table mat-table [dataSource]="myOrder" *ngIf="myOrder.length>0">
@@ -18,16 +19,16 @@
 
             <ng-container matColumnDef="orderDate">
                 <th mat-header-cell *matHeaderCellDef> ORDER DATE </th>
-                <td mat-cell *matCellDef="let element"> {{element.orderDate}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.orderDate | date}} </td>
                 <td mat-footer-cell *matFooterCellDef>  </td>
 
             </ng-container>
             
 
 
-            <ng-container matColumnDef="success">
+            <ng-container matColumnDef="paymentStatus">
                 <th mat-header-cell *matHeaderCellDef> PAYMENT STATUS </th>
-                <td mat-cell *matCellDef="let element"> {{element.success}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.paymentStatus ? 'Success': 'Failed'}} </td>
                 <td mat-footer-cell *matFooterCellDef>  </td>
 
             </ng-container>

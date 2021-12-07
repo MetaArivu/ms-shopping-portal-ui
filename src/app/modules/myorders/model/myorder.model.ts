@@ -1,16 +1,15 @@
-export class MyOrderModel {
-    id: string;
-    orderNo: string;
-    orderDate: string;
-    total: number;
-    success: boolean;
+export class MyOrderResponseModel {
+    success: boolean = false;
+    message: string = "";
+    data : MyOrderModel [] = [];
+       
+}
 
-    constructor(id: string,  orderNo: string,  orderDate: string, total: number,  success: boolean) {
-
-            this.id = id;
-            this.orderNo = orderNo;
-            this.orderDate = orderDate;
-            this.total = total;
-            this.success = success;
-    }
+export class MyOrderModel{
+    id: string ="";
+    orderNo: string ="";
+    orderDate: Date = new Date();
+    total: number = 0;
+    paymentStatus: boolean = false;
+    lineItems : any; 
 }

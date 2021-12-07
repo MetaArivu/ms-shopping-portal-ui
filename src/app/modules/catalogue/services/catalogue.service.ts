@@ -11,6 +11,8 @@ export class CatalogueService {
 
     }
 
+    
+
     fetchAllCatlogueItems() {
         const url  = environment.prodService+environment.allProducts;
         const httpOptions = {
