@@ -19,7 +19,11 @@ export class MyOrderComponent implements OnInit {
     }
 
     ngOnInit(){
-        this.fetchMyOrderDetails();
+        this.loader = true;
+        setTimeout(() => {
+            this.fetchMyOrderDetails();
+        }, 1000);
+        
     }
 
     private fetchMyOrderDetails(){
