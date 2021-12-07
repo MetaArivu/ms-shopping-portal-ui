@@ -16,6 +16,7 @@ export const environment = {
   allProducts : "/api/v1/",
 
   addToCart : "/api/v1/add",
+  removeFromCart : "/api/v1/remove",
 
   myCart : "/api/v1/"
 };

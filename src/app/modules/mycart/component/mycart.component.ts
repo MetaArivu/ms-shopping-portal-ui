@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { MyCartLineItemsModel, MyCartModel, MyCartResponse } from "../model/mycart.model";
 import { MyCartService } from "../services/mycart.service";
@@ -11,11 +12,11 @@ import { MyCartService } from "../services/mycart.service";
 export class MyCartComponent implements OnInit {
 
     myCart: MyCartLineItemsModel[];
-    displayedColumns: string[] = ['itemName', 'price','qty','total'];
+    displayedColumns: string[] = ['itemName', 'price','qty','total','action'];
     totalAmount: number;
     loader: boolean = false;
 
-    constructor(private mycartService: MyCartService, private router : Router) {
+    constructor(private _snackBar: MatSnackBar,private mycartService: MyCartService, private router : Router) {
         this.myCart = [];
         this.totalAmount = 0;
     }
@@ -24,7 +25,8 @@ export class MyCartComponent implements OnInit {
         this.fetchMyCartDetails();
     }
 
-    private fetchMyCartDetails(){
+    fetchMyCartDetails(){
+        this.loader = true;
         this.myCart = [];
         this.totalAmount = 0;
         this.mycartService
@@ -34,12 +36,41 @@ export class MyCartComponent implements OnInit {
                     _myCart.data.forEach(_data =>{
                         _data.lineItems.forEach(lineItem =>{
                             let model : MyCartLineItemsModel  = new MyCartLineItemsModel(lineItem.itemId,lineItem.itemName,lineItem.qty,lineItem.unitPrice,lineItem.img,lineItem.totalPrice);
-                            this.totalAmount = this.totalAmount + model.totalPrice;
-                            this.myCart.push(model);
+                            if(model.qty >0)
+                            {
+                                this.totalAmount = this.totalAmount + model.totalPrice;
+                                this.myCart.push(model);
+                            }
+                            
                         });
                     })
                 }
                  
+            },(error)=>{
+
+            },()=>{
+                this.loader = false;
+            }); 
+    }
+
+    removeItem(item: MyCartLineItemsModel){
+        this.loader = true;
+        this.mycartService
+            .removeItemFromMyCart(item.itemId)
+            .subscribe((_myCart: MyCartResponse)=>{
+                if(_myCart.success){
+                    setTimeout(() => {
+                        this.fetchMyCartDetails();
+                        this._snackBar.open(_myCart.message, "Success", { duration: 2000, panelClass: ["success"], });
+                        this.loader = false;
+                    }, 1000);
+                    
+                }
+                 
+            },(error)=>{
+                this.loader = false;
+            },()=>{
+               
             }); 
     }
 

@@ -12,7 +12,7 @@ export class MyCartService {
     }
 
     fetchMyCart() {
-        const url = environment.cartQueryService + environment.myCart + "61ae0189953ea2617e5dedb1";
+        const url = environment.cartQueryService + environment.myCart;
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
@@ -20,5 +20,17 @@ export class MyCartService {
             })
         };
         return this.http.get<MyCartResponse>(url, httpOptions);
+    }
+
+    removeItemFromMyCart(itemId: string) {
+        const req = { 'itemId': itemId, 'qty': 0 };
+        const url = environment.cartCmdService + environment.removeFromCart;
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': this.cookieService.get('customtoken')
+            })
+        };
+        return this.http.post<MyCartResponse>(url, req, httpOptions);
     }
 }
