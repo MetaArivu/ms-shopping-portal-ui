@@ -42,3 +42,8 @@ export class Reviews {
     description : string = "";
     rating : number = 0;
 }
+
+export class AddToCartResponse {
+    success : boolean = false;
+    message : string = "";
+}

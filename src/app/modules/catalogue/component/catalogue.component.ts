@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
-import { CatalogueModel, CatalogueResponseModel } from "../model/catalogue.model";
+import { AddToCartResponse, CatalogueModel, CatalogueResponseModel } from "../model/catalogue.model";
 import { CatalogueService } from "../services/catalogue.service";
 
 @Component({
@@ -32,11 +32,16 @@ export class CatalogueComponent implements OnInit {
 
     addToCart(item: CatalogueModel){
         item.loader = true;
-        setTimeout(() => {
-            item.loader  = false;
-            this._snackBar.open("Item Added To Cart Successfully !", "Success", { duration: 2000, panelClass: ["success"], })
-
-        }, 1000);
+        this.catalogueService
+            .addToCart(item.id, 1)
+            .subscribe((response : AddToCartResponse) => {
+                item.loader  = false;
+                this._snackBar.open(response.message, response.success ? "Success":"Error", { duration: 2000, panelClass: [response.success ? "success":"error"], })
+            },(error) =>{
+                item.loader  = false;
+                this._snackBar.open("Item Cannot Be Added to Cart!", "Error", { duration: 2000, panelClass: "error", })
+            });
+        
     }
 
     review(item: CatalogueModel){

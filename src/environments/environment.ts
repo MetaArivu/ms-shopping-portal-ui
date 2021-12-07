@@ -7,9 +7,15 @@ export const environment = {
   
   userService : "http://localhost:6061/user-service",
   prodService : "http://localhost:6062/product-service",
+  cartCmdService : "http://localhost:6064/shopping-cart-cmd-service",
+  cartQueryService : "http://localhost:6066/shopping-cart-query-service",
   
   loginUrl : "/api/v1/login",
   registerUserUrl : "/api/v1/register",
 
-  allProducts : "/api/v1/"
+  allProducts : "/api/v1/",
+
+  addToCart : "/api/v1/add",
+
+  myCart : "/api/v1/"
 };

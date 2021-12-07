@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { MyCartModel } from "../model/mycart.model";
+import { MyCartLineItemsModel, MyCartModel, MyCartResponse } from "../model/mycart.model";
 import { MyCartService } from "../services/mycart.service";
 
 @Component({
@@ -10,7 +10,7 @@ import { MyCartService } from "../services/mycart.service";
 })
 export class MyCartComponent implements OnInit {
 
-    myCart: MyCartModel[];
+    myCart: MyCartLineItemsModel[];
     displayedColumns: string[] = ['itemName', 'price','qty','total'];
     totalAmount: number;
     loader: boolean = false;
@@ -29,12 +29,17 @@ export class MyCartComponent implements OnInit {
         this.totalAmount = 0;
         this.mycartService
             .fetchMyCart()
-            .subscribe((_myCart: MyCartModel[])=>{
-                _myCart.forEach(cart=>{
-                    let model : MyCartModel  = new MyCartModel(cart.id,cart.itemId,cart.itemName,cart.desc,cart.qty,cart.price,cart.img);
-                    this.totalAmount = this.totalAmount + model.total;
-                    this.myCart.push(model);
-                 });
+            .subscribe((_myCart: MyCartResponse)=>{
+                if(_myCart.success){
+                    _myCart.data.forEach(_data =>{
+                        _data.lineItems.forEach(lineItem =>{
+                            let model : MyCartLineItemsModel  = new MyCartLineItemsModel(lineItem.itemId,lineItem.itemName,lineItem.qty,lineItem.unitPrice,lineItem.img,lineItem.totalPrice);
+                            this.totalAmount = this.totalAmount + model.totalPrice;
+                            this.myCart.push(model);
+                        });
+                    })
+                }
+                 
             }); 
     }
 
