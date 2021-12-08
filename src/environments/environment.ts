@@ -14,6 +14,7 @@ export const environment = {
 
   loginUrl : "/api/v1/login",
   registerUserUrl : "/api/v1/register",
+  loginUserInfoUrl : "/api/v1/login/userinfo",
 
   allProducts : "/api/v1/",
 

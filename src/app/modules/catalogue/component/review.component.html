@@ -15,7 +15,7 @@
         <mat-card-content >
             
             <div *ngIf="prodDetails.review.reviewPresent">
-                <mat-label>Author: </mat-label><b>Reviews</b><br/>
+                <mat-label><h1>Reviews</h1></mat-label>
 
                 <div *ngFor="let review of prodDetails.review.reviews">
                     <mat-label>Author: </mat-label><b>{{review.reviewerName}}</b><br/>
