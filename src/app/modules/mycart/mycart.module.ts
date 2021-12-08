@@ -6,11 +6,12 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule } from "@angular/router";
 import { MaterialComponentModule } from "src/material.modules";
+import { CheckOutComponent } from "./component/checkout.component";
 import { MyCartComponent } from "./component/mycart.component";
 
 
 @NgModule({
-    declarations: [MyCartComponent],
+    declarations: [MyCartComponent, CheckOutComponent],
     imports: [
         CommonModule,
         FormsModule,
@@ -18,7 +19,9 @@ import { MyCartComponent } from "./component/mycart.component";
         HttpClientModule,
         MaterialComponentModule,
         RouterModule.forChild([
-            { path: '', component: MyCartComponent },
+            { path: '', redirectTo:"details",pathMatch : "full" },
+            { path: 'details', component: MyCartComponent },
+            { path: 'checkout', component: CheckOutComponent },
         ]),
 
     ]

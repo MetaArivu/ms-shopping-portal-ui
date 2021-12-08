@@ -74,10 +74,19 @@ export class MyCartComponent implements OnInit {
             }); 
     }
 
-    proceedToPayment(){
+    checkOutCart(){
+
         this.loader = true;
-        setTimeout(() => {
-            this.router.navigate(['/home/payment']);
-        }, 1000);
+        this.mycartService
+            .checkOutCartDetails()
+            .subscribe((respponse: MyCartResponse) =>{
+                if(respponse.success){
+                    setTimeout(() => {
+                        this.loader = false;
+                        this.router.navigate(['/home/cart/checkout']);
+                    }, 1000);
+                }
+            });
+        
     }
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router } from "@angular/router";
-import { MyCartLineItemsModel, MyCartResponse } from "../../mycart/model/mycart.model";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Subscription } from "rxjs";
+import { MyCartCheckOutResponseModel, MyCartLineItemsModel, MyCartResponse } from "../../mycart/model/mycart.model";
 import { PaymentService } from "./service/payment.service";
 
 @Component({
@@ -14,49 +15,58 @@ export class PaymentComponent implements OnInit {
 
     paymentForm: FormGroup;
     loader: boolean = false;
-    totalAmount : number = 0;
-    cartId : string = "";
-    customerId : string = "";
 
-    constructor(private _snackBar: MatSnackBar, private router: Router, private paymentSvc: PaymentService) {
+    orderId : string = "";
+    totalAmount: number = 0;
+    cartId: string = "";
+    customerId: string = "";
+    
+    sub: Subscription = new Subscription();
+
+    constructor(private _snackBar: MatSnackBar, private router: Router, private route: ActivatedRoute, private paymentSvc: PaymentService) {
         this.paymentForm = new FormGroup({
             userName: new FormControl(null, [Validators.required]),
             cardNo: new FormControl(null, [Validators.required, Validators.minLength(16), Validators.maxLength(16)]),
             cvv: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(3)])
         });
+
     }
 
     ngOnInit() {
-        this.myCart()
+        if(this.route.snapshot.queryParamMap.get('id')){
+            this.orderId = this.route.snapshot.queryParamMap.get('id')+"";
+            this.fetchCartPayment();
+        }else{
+            this._snackBar.open("Something Went Wrong, Please Proceed from MyCart", "Error", { duration: 2000, panelClass: ["success"], });
+        }
     }
 
     makePayment() {
+        debugger;
         this.loader = true;
         this.paymentSvc
-            .makePayment(this.cartId,this.customerId,this.totalAmount)
-            .subscribe((_myCart: MyCartResponse)=>{
-                if(_myCart.success){ 
+            .makePayment(this.orderId,this.cartId, this.customerId, this.totalAmount)
+            .subscribe((_myCart: MyCartResponse) => {
+                if (_myCart.success) {
                     this._snackBar.open("Payment Proceed Successfully", "Success", { duration: 2000, panelClass: ["success"], });
                     this.router.navigate(['/home/myorders']);
                 }
                 this.loader = false;
-            },(error)=>{
+            }, (error) => {
                 this._snackBar.open("Payment Cannot Be Proceed", "Error", { duration: 2000, panelClass: ["error"], });
                 this.loader = false;
 
-            },()=>{
-                
-            }); 
+            }, () => {
+
+            });
     }
 
-    
 
-
-    myCart(){
+    fetchCartPayment() {
         this.loader = true;
         this.totalAmount = 0;
         this.paymentSvc
-            .fetchMyCart()
+            .fetchCartPayment()
             .subscribe((_myCart: MyCartResponse)=>{
                 if(_myCart.success){
                     _myCart.data.forEach(_data =>{
@@ -78,6 +88,10 @@ export class PaymentComponent implements OnInit {
             },()=>{
                 this.loader = false;
             }); 
+    }
+
+    checkOut() {
+        this.router.navigate(['/home/cart/checkout']);
     }
 
 }

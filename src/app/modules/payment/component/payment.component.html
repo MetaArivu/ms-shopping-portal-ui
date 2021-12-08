@@ -48,9 +48,9 @@
     </mat-card-content>
  
     <mat-card-actions style="display: inline-flex; width: 100%; justify-content: space-between">
-        <button mat-flat-button (click)="myCart()">
-            <mat-icon>shopping_cart</mat-icon>
-            <span>&nbsp;MY CART</span>
+        <button mat-flat-button (click)="checkOut()">
+            <mat-icon>arrow_back</mat-icon>
+            <span>&nbsp;CHECKOUT</span>
         </button>
         <button mat-raised-button color="warn" (click)="makePayment()" [disabled]="!paymentForm.valid">
             <mat-icon>credit_card</mat-icon>

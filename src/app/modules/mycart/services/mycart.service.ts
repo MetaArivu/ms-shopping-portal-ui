@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { CookieService } from "ngx-cookie-service";
 import { environment } from "src/environments/environment";
-import { MyCartModel, MyCartResponse } from "../model/mycart.model";
+import { MyCartCheckOutResponseModel, MyCartModel, MyCartResponse } from "../model/mycart.model";
 
 @Injectable({ providedIn: 'root' })
 export class MyCartService {
@@ -20,6 +20,28 @@ export class MyCartService {
             })
         };
         return this.http.get<MyCartResponse>(url, httpOptions);
+    }
+
+    fetchCheckOutCartDetails() {
+        const url = environment.orderService + environment.checkOutOrderByUserId;
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': this.cookieService.get('customtoken')
+            })
+        };
+        return this.http.get<MyCartCheckOutResponseModel>(url,  httpOptions);
+    }
+
+    checkOutCartDetails() {
+        const url = environment.cartCmdService + environment.checkout;
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': this.cookieService.get('customtoken')
+            })
+        };
+        return this.http.post<MyCartResponse>(url,  {},httpOptions);
     }
 
     removeItemFromMyCart(itemId: string) {

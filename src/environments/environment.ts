@@ -20,10 +20,12 @@ export const environment = {
 
   addToCart : "/api/v1/add",
   removeFromCart : "/api/v1/remove",
-
+  checkout: "/api/v1/checkout",
+  
   myCart : "/api/v1/",
 
   makePayment : "/api/v1/",
 
-  orderByUserId : "/api/v1/"
+  orderByUserId : "/api/v1/",
+  checkOutOrderByUserId : "/api/v1/checkout"
 };
