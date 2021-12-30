@@ -25,13 +25,10 @@
       <mat-progress-bar *ngIf="item.loader" mode="indeterminate"></mat-progress-bar>
 
       <mat-card-actions style="display: inline-flex; width: 100%; justify-content: space-between">
-        <span>
-          &nbsp;
-        </span>
-        <!-- <button mat-flat-button (click)="review(item)">
+        <button mat-flat-button (click)="review(item)">
           <mat-icon>reviews</mat-icon>
           <span>&nbsp;Reviews</span>
-        </button> -->
+        </button>
         <button mat-raised-button color="primary" (click)="addToCart(item)">
           <mat-icon>add_shopping_cart</mat-icon>
           <span>&nbsp;ADD TO CART</span>
